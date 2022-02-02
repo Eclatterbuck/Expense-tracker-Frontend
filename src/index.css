@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Licorice&display=swap');
+
+body {
+    font-family: 'Anton', sans-serif;
+}
+
+#createPersonForm{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    background-color: antiquewhite;
+    margin-bottom: 1rem;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+#createPersonForm * {
+    margin: 5px;
+}
+
+#peopleContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1rem;
+}
+
+.titleField, .submitBtn {
+    grid-column: span 2;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.person {
+    text-align: center;
+    border: 5px solid black;
+    border-radius: 10px;
+    background-color: rgb(209, 202, 202);
+}
+
+h1 {
+    color: black;
+}
+
