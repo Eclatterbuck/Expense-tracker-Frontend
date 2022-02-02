@@ -1,30 +1,31 @@
-import { Link } from "react-router-dom"
-import { login, logout } from "../services/firebase"
+import { login, logout } from '../services/firebase';
+import { Link } from 'react-router-dom'
 
-const Header = (props) => (
-  <nav className="nav">
-    <Link to="/">
-      <div>People App</div>
-    </Link>
-    {
-      props.user ?
-        <>
-          <button onClick={logout} style={{ marginLeft: 'auto' }}>Logout</button>
-          <img
-            src={props.user.photoURL}
-            alt=""
-            style={{
-              height: '3rem',
-              width: '3rem',
-              borderRadius: '50%',
-              marginLeft: 'auto'
-            }}
-          />
-        </>
-        :
-        <button onClick={login}>Login</button>}
+function Header(props) {
+	return (
+		<nav className="nav">
+			<Link to='/'>
+				<div>People App</div>
+			</Link>
+			{
+				props.user ?
+				<>
+					<img 
+						style={{
+							height: '3.125rem',
+							width: '3.125rem',
+							borderRadius: '50%'
+						}} 
+						src={props.user.photoURL} 
+						alt={props.user.displayName} 
+					/>
+					<button onClick={logout}>Logout</button>
+				</>
+				:
+				<button onClick={login}>Login</button>
+			}
+		</nav>
+	)
+}
 
-  </nav>
-)
-
-export default Header
+export default Header;

@@ -1,13 +1,14 @@
-import firebase from 'firebase'
-require('firebase/auth')
+import firebase from 'firebase/app';
+import 'firebase/auth';
+
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCm-IG7LAc9Pw-JKmyRFYPloFvRs7ghZRs",
-    authDomain: "react-firebase-project-ea97f.firebaseapp.com",
-    projectId: "react-firebase-project-ea97f",
-    storageBucket: "react-firebase-project-ea97f.appspot.com",
-    messagingSenderId: "9327910340",
-    appId: "1:9327910340:web:2899dd9a9b310f3d22d891"
+    apiKey: "AIzaSyDZEnfy9gCo18CVYs6ciVoX6KjbLAMKrqw",
+    authDomain: "react-firebase-projects-d9f91.firebaseapp.com",
+    projectId: "react-firebase-projects-d9f91",
+    storageBucket: "react-firebase-projects-d9f91.appspot.com",
+    messagingSenderId: "922641939569",
+    appId: "1:922641939569:web:95a24620aefd0242caefd0"
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -16,15 +17,11 @@ const auth = firebase.auth();
 const provider = new firebase.auth.GoogleAuthProvider();
 
 function login() {
-    return auth.signInWithPopup(provider)    
+    return auth.signInWithPopup(provider);
 }
 
 function logout() {
     return auth.signOut();
 }
 
-export {
-    auth,
-    login,
-    logout
-}
+export { auth, login, logout };

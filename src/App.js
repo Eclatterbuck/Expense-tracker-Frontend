@@ -1,15 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { auth } from "./services/firebase";
-import "./index.css";
-import Header from "./components/Header"
-import Main from "./components/Main"
+import { useState, useEffect } from 'react';
+import { auth } from './services/firebase';
+import './App.css';
+import './styles.scss';
+import './index.css';
+// IMPORT COMPONENTS
+import Header from './components/Header'
+import Main from './components/Main'
 
-export default function App() {
-  const [ user, setUser ] = useState(null);
-
+function App() {
+  const [user, setUser] = useState(null);
+  
   useEffect(() => {
-    auth.onAuthStateChanged(user => setUser(user))
-  }, [])
+    auth.onAuthStateChanged(user => setUser(user));
+  }, []);
 
   return (
     <div className="App">
@@ -18,3 +21,5 @@ export default function App() {
     </div>
   );
 }
+
+export default App;

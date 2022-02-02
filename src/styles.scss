@@ -9,7 +9,7 @@ $contrastcolor: white;
   background-color: $maincolor;
 }
 
-@mixin black-test-white-bg {
+@mixin black-text-white-bg {
   color: $maincolor;
   background-color: $contrastcolor;
 }
@@ -18,6 +18,7 @@ $contrastcolor: white;
 // Header
 // --------------------------
 
+
 nav {
   @include white-text-black-bg;
   display: flex;
@@ -25,52 +26,10 @@ nav {
 
   a {
     @include white-text-black-bg;
+
     div {
       margin: 10px;
       font-size: large;
     }
   }
-}
-
-// --------------------------
-// Form
-// --------------------------
-
-section,
-div {
-  form {
-    input {
-      @include white-text-black-bg;
-      padding: 10px;
-      font-size: 1.1em;
-      margin: 10px;
-
-      &[type="submit"]:hover {
-        @include black-test-white-bg;
-      }
-    }
-  }
-}
-
-// --------------------------
-// button
-// --------------------------
-
-button#delete {
-  @include white-text-black-bg;
-  display: block;
-  margin: auto;
-  font-size: 1.3em;
-  padding: 10px;
-}
-
-// --------------------------
-// images
-// --------------------------
-
-img {
-  width: 300px;
-  height: 300px;
-  border-radius: 90px;
-  object-fit: cover;
 }

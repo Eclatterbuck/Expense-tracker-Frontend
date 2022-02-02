@@ -1,16 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+// IMPORT SCSS FILE TO BE SOURCE OF STYLING
+// import './styles.scss'
+// import './index.css';
+// IMPORT ROUTER
+import { BrowserRouter as Router } from 'react-router-dom'
 import App from './App';
-import { BrowserRouter as Router } from 'react-router-dom';
-import './styles.scss'
-
+import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-  <Router>
-    <React.StrictMode>
-    <App />
-    </React.StrictMode>
-  </Router>,
-  document.getElementById('root')
-); 
+	<Router>
+		<React.StrictMode>
+			<App />
+		</React.StrictMode>
+	</Router>,
+	document.getElementById('root')
+);
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();

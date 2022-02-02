@@ -1,62 +1,68 @@
-import { useState } from "react"
+import { useState } from 'react';
 
-const Show = (props) => {
-    const person = props.people.find(person => person._id === props.match.params.id)
+function Show(props) {
+	const id = props.match.params.id;
+	const person = props.people.find(p => p._id === id);
 
-    const [ editForm, setEditForm ] = useState(person);
+	const [ editForm, setEditForm ] = useState(person);
 
-    const handleChange = (e) => {
-         setEditForm((prevState) => ({
-             ...prevState,
-             [e.target.name]: e.target.value
-         }))   
-    }
+	const handleChange = (event) => {
+		setEditForm({
+			...editForm,
+			[event.target.name]: event.target.value
+		});
+	};
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        props.updatePerson(editForm, person._id);
-        
-        // Then redirect them back to the main dashboard page
-        props.history.push('/people')
-    }
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		props.updatePeople(editForm, id);
+		props.history.push('/');
+	}
 
-    const handleDelete = (e) => {
-        props.deletePerson(person._id);
-        props.history.push('/people');
-    }
+	const handleClick = () => {
+		props.deletePeople(id);
+		props.history.push('/');
+	}
 
-    return (
-        <div className="personDetails">
-            <h1>{person.name}</h1>
-            <img src={person.image} alt={person.name} />
-            <h3>{person.title}</h3>
-            <form onSubmit={handleSubmit}>
-                <input 
-                    type="text" 
-                    name='name'
-                    placeholder={editForm.name}
-                    onChange={handleChange}
-                />
-                <input 
-                    type="text" 
-                    name='image'
-                    placeholder={editForm.image}
-                    onChange={handleChange}
-                />
-                <input 
-                    type="text" 
-                    name='title'
-                    placeholder={editForm.title}
-                    onChange={handleChange}
-                />
-                <input type="submit" value="Update Person"/>
-            </form>
-            <form onSubmit={handleDelete}>
-                <input type="submit" value="Delete Person"/>
-            </form>
-        </div>
-
-    )
+	return (
+		<div className="person">
+			<h1>{person.name}</h1>
+			<h2>{person.title}</h2>
+			{
+				person.image && <img src={person.image} alt={person.name} />
+			}
+			<button id="delete" onClick={handleClick}>
+				DELETE
+			</button>
+			<form onSubmit={handleSubmit}>
+				<input 
+					type="text" 
+					name="name" 
+					placeholder="Name"
+					value={editForm.name}
+					onChange={handleChange} 
+				/>
+				<br />
+				<input 
+					type="text" 
+					name="image" 
+					placeholder="Image URL"
+					value={editForm.image}
+					onChange={handleChange} 
+				/>
+				<br />
+				<input 
+					type="text" 
+					name="title" 
+					placeholder="Title"
+					value={editForm.title}
+					onChange={handleChange} 
+				/>
+				<br />
+				<input type="submit" value="Update Person" />
+			</form>
+		</div>
+	);
 }
 
-export default Show
+export default Show;

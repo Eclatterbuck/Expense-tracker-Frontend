@@ -1,81 +1,82 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+function Index(props) {
+	const [newForm, setNewForm] = useState({
+		name: '',
+		image: '',
+		title: '',
+	});
 
-const Index = ({ people, createPeople, user }) => {
+	const handleChange = (event) => {
+		if(!props.user) return;
+		setNewForm({
+			...newForm,
+			[event.target.name]: event.target.value,
+		});
+	};
 
-    const [ newForm, setNewForm ] = useState({
-        name: '',
-        image: '',
-        title: ''
-    })
+	const handleSubmit = (event) => {
+		if(!props.user) return;
+		event.preventDefault();
+		props.createPeople(newForm);
+		setNewForm({
+			name: '',
+			image: '',
+			title: '',
+		});
+	};
 
-    const handleChange = (e) => {
-        setNewForm(prevState => ({
-            ...prevState,
-            [e.target.name]: e.target.value
-        }))
-    }
+	// handleSubmit - will submit our new user for creation
 
-    const handleSubmit = (e) => {
-        if(!user) return;
-        e.preventDefault();
-        createPeople(newForm);
-        setNewForm({
-            name: '',
-            image: '',
-            title: ''
-        })
-    }
+	const loaded = () => {
+		return props.people.map((person) => (
+			<div key={person._id} className='person'>
+				<Link to={`/people/${person._id}`}>
+					<h1>{person.name}</h1>
+				</Link>
+				{/* <img src={person.image} alt={person.name} /> */}
+				<h3>{person.title}</h3>
+			</div>
+		));
+	};
 
-    const loaded = () => {
-        return people.map(person => (
-            <div className='person' key={person._id}>
-                <Link to={`/people/${person._id}`} >
-                    <h1>{person.name}</h1>
-                </Link>
-                <img style={{height: '10rem', width: '20rem'}} src={person.image} alt={person.name} />
-                <h3>{person.title}</h3>
-            </div>
-        ))
-    }
+	const loading = () => {
+		return <h1>Loading</h1>;
+	};
 
-    const loading = () => (<h1>Loading...</h1>)
-
-    return (
-        <section>
-            <form onSubmit={handleSubmit} id="createPersonForm">
-                <input 
-                    type="text" 
-                    value={newForm.name}
-                    name='name'
-                    placeholder='name'
-                    onChange={handleChange}
-                />
-                <input 
-                    type="text" 
-                    value={newForm.image}
-                    name='image'
-                    placeholder='image'
-                    onChange={handleChange}
-                />
-                <input 
-                    className='titleField'
-                    type="text" 
-                    value={newForm.title}
-                    name='title'
-                    placeholder='title'
-                    onChange={handleChange}
-                />
-                <input disabled={!user} type="submit" value='Create Person' className='submitBtn' />
-            </form>
-            <div id='peopleContainer'>
-                {people ? loaded() : loading()}    
-            </div>    
-        </section>
-    )
+	  return (
+			<section>
+				<form style={{marginTop: '5rem'}} onSubmit={handleSubmit}>
+					<input
+						type='text'
+						value={newForm.name}
+						name='name'
+						placeholder='name'
+						onChange={handleChange}
+					/>
+					<br />
+					<input
+						type='text'
+						value={newForm.image}
+						name='image'
+						placeholder='image URL'
+						onChange={handleChange}
+					/>
+					<br />
+					<input
+						type='text'
+						value={newForm.title}
+						name='title'
+						placeholder='title'
+						onChange={handleChange}
+					/>
+					<br />
+					<input disabled={!props.user} type='submit' value='Create Person' />
+				</form>
+				{props.people ? loaded() : loading()}
+			</section>
+		);
 }
 
-
-
-export default Index
+export default Index;
