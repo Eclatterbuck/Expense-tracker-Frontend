@@ -8,7 +8,7 @@ function Main(props) {
 	const [expense, setExpense] = useState([]);
 	const getExpenseRef = useRef();
 
-	const URL = "http://localhost:3001/expense/"
+	const URL = "https://expense-trackerkool.herokuapp.com/"
 	// const URL = 'https://phoenix-api-app.herokuapp.com/people/';
 	// retrieve all the people
 
