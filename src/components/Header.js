@@ -5,7 +5,7 @@ function Header(props) {
 	return (
 		<nav className="nav">
 			<Link to='/'>
-				<div>People App</div>
+				<div>Expense Tracker </div>
 			</Link>
 			{
 				props.user ?

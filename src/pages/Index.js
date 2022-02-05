@@ -5,7 +5,7 @@ function Index(props) {
 	const [newForm, setNewForm] = useState({
 		name: '',
 		image: '',
-		title: '',
+		amount: '',
 	});
 
 	const handleChange = (event) => {
@@ -19,24 +19,26 @@ function Index(props) {
 	const handleSubmit = (event) => {
 		if(!props.user) return;
 		event.preventDefault();
-		props.createPeople(newForm);
+		props.createExpense(newForm);
 		setNewForm({
 			name: '',
 			image: '',
-			title: '',
+			amount: '',
 		});
 	};
 
 	// handleSubmit - will submit our new user for creation
 
 	const loaded = () => {
-		return props.people.map((person) => (
-			<div key={person._id} className='person'>
-				<Link to={`/people/${person._id}`}>
-					<h1>{person.name}</h1>
+		
+		return props.expense.map((expense) => (
+			
+			<div key={expense._id} className='expense'>
+				<Link to={`/expense/${expense._id}`}>
+					<h1>{expense.name}</h1>
 				</Link>
 				{/* <img src={person.image} alt={person.name} /> */}
-				<h3>{person.title}</h3>
+				<h3>{expense.title}</h3>
 			</div>
 		));
 	};
@@ -52,7 +54,7 @@ function Index(props) {
 						type='text'
 						value={newForm.name}
 						name='name'
-						placeholder='name'
+						placeholder='expense name'
 						onChange={handleChange}
 					/>
 					<br />
@@ -66,15 +68,15 @@ function Index(props) {
 					<br />
 					<input
 						type='text'
-						value={newForm.title}
-						name='title'
-						placeholder='title'
+						value={newForm.amount}
+						name='amount'
+						placeholder='amount'
 						onChange={handleChange}
 					/>
 					<br />
-					<input disabled={!props.user} type='submit' value='Create Person' />
+					<input disabled={!props.user} type='submit' value='Create Expense' />
 				</form>
-				{props.people ? loaded() : loading()}
+				{props.expense.length > 0 ? loaded() : loading()}
 			</section>
 		);
 }

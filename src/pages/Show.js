@@ -2,9 +2,9 @@ import { useState } from 'react';
 
 function Show(props) {
 	const id = props.match.params.id;
-	const person = props.people.find(p => p._id === id);
+	const expense = props.expense.find(p => p._id === id);
 
-	const [ editForm, setEditForm ] = useState(person);
+	const [ editForm, setEditForm ] = useState(expense);
 
 	const handleChange = (event) => {
 		setEditForm({
@@ -15,21 +15,21 @@ function Show(props) {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		props.updatePeople(editForm, id);
+		props.updateExpense(editForm, id);
 		props.history.push('/');
 	}
 
 	const handleClick = () => {
-		props.deletePeople(id);
+		props.deleteExpense(id);
 		props.history.push('/');
 	}
 
 	return (
-		<div className="person">
-			<h1>{person.name}</h1>
-			<h2>{person.title}</h2>
+		<div className="expense">
+			<h1>{expense.name}</h1>
+			<h2>{expense.title}</h2>
 			{
-				person.image && <img src={person.image} alt={person.name} />
+				expense.image && <img src={expense.image} alt={expense.name} />
 			}
 			<button id="delete" onClick={handleClick}>
 				DELETE
@@ -48,18 +48,20 @@ function Show(props) {
 					name="image" 
 					placeholder="Image URL"
 					value={editForm.image}
-					onChange={handleChange} 
+					onChange={handleChange}
 				/>
 				<br />
 				<input 
-					type="text" 
-					name="title" 
-					placeholder="Title"
-					value={editForm.title}
-					onChange={handleChange} 
+					type="number" 
+					// min="1"
+					// step="any"//for use of cents and decimals
+					name="amount" 
+					placeholder="Amount"
+					value={editForm.amount}
+					onChange={handleChange}
 				/>
 				<br />
-				<input type="submit" value="Update Person" />
+				<input type="submit" value="Update Expense" />
 			</form>
 		</div>
 	);

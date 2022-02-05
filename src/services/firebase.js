@@ -2,15 +2,16 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 
 
+// Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyDZEnfy9gCo18CVYs6ciVoX6KjbLAMKrqw",
-    authDomain: "react-firebase-projects-d9f91.firebaseapp.com",
-    projectId: "react-firebase-projects-d9f91",
-    storageBucket: "react-firebase-projects-d9f91.appspot.com",
-    messagingSenderId: "922641939569",
-    appId: "1:922641939569:web:95a24620aefd0242caefd0"
-};
-
+    apiKey: "AIzaSyAvF55tdmcP2riVNGuRuaRcTp5kcj9JnqU",
+    authDomain: "react-firebase-projects-2512c.firebaseapp.com",
+    projectId: "react-firebase-projects-2512c",
+    storageBucket: "react-firebase-projects-2512c.appspot.com",
+    messagingSenderId: "750852333869",
+    appId: "1:750852333869:web:e497deaaf6ccc8baf0f3a4"
+  };
+  
 firebase.initializeApp(firebaseConfig);
 
 const auth = firebase.auth();

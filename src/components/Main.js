@@ -4,17 +4,18 @@ import Index from '../pages/Index';
 import Show from '../pages/Show';
 
 function Main(props) {
-	const [people, setPeople] = useState([]);
-	const getPeopleRef = useRef();
+	console.log(props)
+	const [expense, setExpense] = useState([]);
+	const getExpenseRef = useRef();
 
-	const URL = "http://localhost:3001/people/"
+	const URL = "http://localhost:3001/expense/"
 	// const URL = 'https://phoenix-api-app.herokuapp.com/people/';
 	// retrieve all the people
 
-	const getPeople = async () => {
+	const getExpense = async () => {
 		if(!props.user) return;
 		const token = await props.user.getIdToken();
-		
+		console.log(token)
 		const response = await fetch(URL, {
 			method: 'GET',
 			headers: {
@@ -24,26 +25,27 @@ function Main(props) {
 
 		const data = await response.json();
 		
-		setPeople(data);
+		setExpense(data);
 	};
 	
-	const createPeople = async (person) => {
+	
+	const createExpense = async (expense) => {
 		if(!props.user) return;
 		const token = await props.user.getIdToken();
-		
+		console.log(expense)
 		await fetch(URL, {
 			method: 'POST',
 			headers: { 
 				'Content-Type': 'Application/json',
 				'Authorization': 'Bearer ' + token 
 			},
-            body: JSON.stringify(person)
+            body: JSON.stringify(expense)
 		});
-		getPeople()
+		getExpense()
 	};
 
 
-	const updatePeople = async (person, id) => {
+	const updateExpense = async (expense, id) => {
 		if(!props.user) return;
 		const token = await props.user.getIdToken();
 		await fetch(URL + id, {
@@ -52,12 +54,12 @@ function Main(props) {
 				'Content-Type': 'Application/json',
 				'Authorization': 'Bearer ' + token
 			},
-			body: JSON.stringify(person)
+			body: JSON.stringify(expense)
 		});
-		getPeople()
+		getExpense()
 	}
 
-	const deletePeople = async (id) => {
+	const deleteExpense = async (id) => {
 		if(!props.user) return;
 		const token = await props.user.getIdToken();
 		await fetch(URL + id, {
@@ -67,23 +69,23 @@ function Main(props) {
 			}
 		});
 	
-		getPeople();
+		getExpense();
 	};
 
 	const handleLogout = () => {
-		setPeople([]);
+		setExpense([]);
 	}
 
 	// run getPeople once when component is mounted
 
 	useEffect(() => {
-		getPeopleRef.current = getPeople;
+		getExpenseRef.current = getExpense;
 	})
 
 	useEffect(() => {
 	
 		if(props.user) {
-			getPeopleRef.current();
+			getExpense() 
 		} else {
 			handleLogout()
 		}
@@ -93,6 +95,23 @@ function Main(props) {
 	return (
 		<main>
 			<Switch>
+				<Route exact path='/'>
+					<Index user={props.user} expense={expense} createExpense={createExpense} />
+				</Route>
+
+				<Route path='/expense/:id' render={(rp) => (
+					props.user ?
+					<Show 
+						{...rp}
+						updateExpense={updateExpense}
+						deleteExpense={deleteExpense}
+						expense={expense} 
+					/>
+					:
+					<Redirect to="/" />
+				)} />
+			</Switch>
+			{/* <Switch>
 				<Route exact path='/'>
 					<Index user={props.user} people={people} createPeople={createPeople} />
 				</Route>
@@ -108,7 +127,7 @@ function Main(props) {
 					:
 					<Redirect to="/" />
 				)} />
-			</Switch>
+			</Switch> */}
 		</main>
 	);
 }
