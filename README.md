@@ -18,7 +18,7 @@ HEROKU
 
 
 
-(SCREENSHOTS)
+(SCREENSHOTS: 
 
 
 Netfliy Link: https://hardcore-pare-0139db.netlify.app/
