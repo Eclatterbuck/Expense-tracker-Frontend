@@ -19,3 +19,16 @@ HEROKU
 
 
 (SCREENSHOTS)
+
+
+Netfliy Link: https://hardcore-pare-0139db.netlify.app/
+
+
+Unsloved Problems and Also Future Enhancements
+
+1. Incorparation of graphics such as SVG and Pie charts
+2. Columns to separte Expense from income
+3. Functionality to where if you add an expense it will decrease a portion of income on pie chart and if you gain income it will decreease the expense
+4. A way to add users depending on their profile.
+
+
