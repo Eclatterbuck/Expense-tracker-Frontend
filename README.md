@@ -23,6 +23,10 @@ HEROKU
 
 Netfliy Link: https://hardcore-pare-0139db.netlify.app/
 
+Unsolved Problems
+
+1. The incorporation of button click pulsing effect
+
 
 Unsloved Problems and Also Future Enhancements
 
